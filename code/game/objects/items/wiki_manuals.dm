@@ -1,4 +1,4 @@
-// Wiki books that are linked to the configured wiki link.
+content_frame// Wiki books that are linked to the configured wiki link.
 
 /// The size of the window that the wiki books open in.
 #define BOOK_WINDOW_BROWSE_SIZE "970x710"
@@ -8,20 +8,41 @@
 	<head>
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
 	<style>
-		iframe {
+		#frame-holder {
+			position: relative;
+		}
+
+		#frame-holder iframe {
+			width: 100%;
+			height: 97%;
 			display: none;
 		}
+
+		#frame-holder div {
+			position: absolute;
+			width: 98%;
+			height: 97%;
+			z-index: 1;
+		}
+
 	</style>
 	</head>
 	<body>
+
 	<script type="text/javascript">
 		function pageloaded(myframe) {
 			document.getElementById("loading").style.display = "none";
-			myframe.style.display = "inline";
-	}
+			myframe.style.display = "block";
+		}
 	</script>
-	<p id='loading'>You start skimming through the manual...</p>
-	<iframe width='100%' height='97%' onload="pageloaded(this)" src="[##wikiurl]/[##link_identifier]?printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+
+	<p id='loading'>You start skimming through the manual... This may take some time...</p>
+	<div id="frame-holder">
+		<div></div>
+		<iframe width='100%' height='97%' onload="pageloaded(this)" src="[##wikiurl]/[##link_identifier]?action=render" id="main_frame"></iframe>
+	</div>
+
+
 	</body>
 	</html>
 	"}
