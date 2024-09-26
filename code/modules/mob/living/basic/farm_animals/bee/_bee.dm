@@ -196,7 +196,7 @@
 	beegent = toxin
 	name = "[initial(name)] ([toxin.name])"
 	real_name = name
-	AddElement(/datum/element/venomous, beegent.type, injection_range, thrown_effect = TRUE)
+	AddElement(/datum/element/venomous, beegent, injection_range, thrown_effect = TRUE)
 	generate_bee_visuals()
 
 /mob/living/basic/bee/queen

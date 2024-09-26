@@ -6,8 +6,8 @@
 /datum/element/venomous
 	element_flags = ELEMENT_BESPOKE
 	argument_hash_start_idx = 2
-	///Path of the reagent added
-	var/poison_type
+	///Reagent added
+	var/datum/reagent/reagent
 	///Details of how we inject our venom
 	var/injection_flags
 	///How much of the reagent added. if it's a list, it'll pick a range with the range being list(lower_value, upper_value)
@@ -15,9 +15,9 @@
 	///Does this trigger when thrown?
 	var/thrown_effect = FALSE
 
-/datum/element/venomous/Attach(datum/target, poison_type, amount_added, injection_flags = NONE, thrown_effect = FALSE)
+/datum/element/venomous/Attach(datum/target, reagent, amount_added, injection_flags = NONE, thrown_effect = FALSE)
 	. = ..()
-	src.poison_type = poison_type
+	src.reagent = reagent
 	src.amount_added = amount_added
 	src.injection_flags = injection_flags
 	src.thrown_effect = thrown_effect
@@ -41,4 +41,4 @@
 		final_amount_added = rand(amount_added[1], amount_added[2])
 	else
 		final_amount_added = amount_added
-	target.reagents?.add_reagent(poison_type, final_amount_added)
+	reagent.expose_mob(target, INJECT, final_amount_added)
